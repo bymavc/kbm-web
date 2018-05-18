@@ -1,0 +1,62 @@
+<div class="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1>Create a New Knowledge Base</h1>
+                <small>A Knowledge Base includes recompiled information related to a topic, a workgroup or an organization</small>
+                <hr>
+                <form ng-submit="vm.create()" role="form">
+                    <div class="form-group row">
+                        <div class="col-sm-4 col-xs-12">
+                            <label>Owner</label>
+                            <div class="input-group">
+                                <button class="btn btn-block text-left" disabled>
+                                    <img src="{{ vm.owner.image }}" class="img-fluid rounded" style="max-height: 20px; margin-right: 10px;"> {{ vm.owner.username }}
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-sm-8 col-xs-12">
+                            <label for="name">Knowledge Base Name</label>
+                            <input required type="text" maxlength="40" class="form-control" id="name" ng-model="vm.kbase.name" placeholder="Most amazing Knowledge Base">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description </label><small class="text-muted"> (optional)</small>
+                        <input required type="text" maxlength="80" class="form-control" id="description" ng-model="vm.kbase.description" placeholder="This is the best knowledge base to ever exist">
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <div class="custom-controls-stacked">
+                            <label class="custom-control custom-radio">
+                                <input id="public" name="privacy" type="radio" class="custom-control-input" ng-model="vm.kbase.privacy" ng-value="1">
+                                <span class="custom-control-label">
+                                    <i class="fa fa-unlock"></i>
+                                    Public
+                                    <small class="text-muted">  You choose who can see and work on this knowledge base</small>
+                                </span>
+                            </label>
+                            <label class="custom-control custom-radio">
+                                <input id="private" name="privacy" type="radio" class="custom-control-input" ng-model="vm.kbase.privacy" ng-value="2">
+                                <span class="custom-control-label">
+                                    <i class="fa fa-lock"></i>
+                                    Private
+                                    <small class="text-muted">  Anyone can see this knowledge base, you choose who can work on it.</small>
+                                </span>
+                            </label>
+                        </div>
+
+                    </div>
+                    <hr>
+                    <button type="submit" ng-disabled="vm.dataLoading" class="btn btn-primary">
+                        <div ng-if="vm.dataLoading">
+                            <i class="fa fa-spinner fa-pulse"></i>
+                        </div>
+                        <div ng-if="!vm.dataLoading">
+                            Create Knowledge Base
+                        </div>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

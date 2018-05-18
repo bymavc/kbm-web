@@ -1,0 +1,116 @@
+<div class="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-3">
+                <div class="text-center">
+                    <img class="img-thumbnail mb-2" src="{{vm.user.profile_picture}}" alt="">
+                    <h4 class="text-primary text-left">
+                        {{ vm.user.first_name + " " + vm.user.last_name }}
+                    </h4>
+                    <p class="text-default text-left">
+                        {{ vm.user.username }}
+                    </p>
+                </div>
+            </div>
+            <div class="col-9">
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <a href="" class="nav-item nav-link active" id="nav-overview-tab" data-toggle="tab" data-target="#nav-overview" role="tab" aria-controls="nav-overview" aria-selected="true">Overview</a>
+                        <a href="" class="nav-item nav-link" id="nav-kbs-tab" data-toggle="tab" data-target="#nav-kbs" role="tab" aria-controls="nav-kbs" aria-selected="false">Knowledge Bases</a>
+                    </div>
+                </nav>
+                <br>
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-overview" role="tabpanel" aria-labelledby="nav-overview-tab">
+                        <div class="card">
+                            <div class="card-header">
+                                Latest Actions
+                            </div>
+                            <table class="table table-hover table-sm">
+                                <tr ng-repeat="action in vm.user.actions">
+                                    <td class="text-left pl-4">
+                                        <p class="mb-0">
+                                            <a href="{{ '#!/kb/' + action.knowledge_base_id }}">
+                                                {{ action.knowledge_base_name }}
+                                            </a>
+                                        </p>
+                                        <small class="m-0">
+                                            {{ action.description }}
+                                        </small>
+                                    </td>
+                                    <td>
+                                        <p ng-if="action.parent_folder" class="m-0">
+                                            <small>
+                                                Folder:
+                                                <a href="{{ '#!/kb/' + action.knowledge_base_id + '?folder=' + action.folder_id }}">
+                                                    {{ action.folder_name }}
+                                                </a>
+                                            </small>
+                                        </p>
+                                        <p ng-if="action.document_id" class="m-0">
+                                            <small>
+                                                Document:
+                                                <a href="{{ '#!/document/' + action.document_id }}">
+                                                    {{ action.document_name }}
+                                                </a>
+                                            </small>
+                                        </p>
+                                    </td>
+                                    <td class="text-right pr-4">
+                                        <small class="text-secondary">
+                                            {{ action.date | date: medium }}
+                                        </small>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="nav-kbs" role="tabpanel" aria-labelledby="nav-kbs-tab">
+                        <div class="card">
+                            <div class="card-header">
+                                Collaborations
+                            </div>
+                            <div class="card-header d-flex">
+                                <div class="input-group">
+                                    <span class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fa fa-search"></i>
+                                        </span>
+                                    </span>
+                                    <input type="text" class="form-control form-control-sm" placeholder="Search a Knowledge Base">
+                                </div>
+                                <select name="" id="" class="custom-select ml-2" ng-model="vm.tag" ng-change="vm.filterByTag()">
+                                    <option value="none" selected>Select Tag</option>
+                                    <option ng-repeat="tag in vm.tags" value="{{ tag }}">{{ tag }}</option>
+                                </select>
+                                <a href="#!/new/kb" class="btn btn-primary ml-2">
+                                    New KB
+                                </a>
+                            </div>
+                            <table class="table">
+                                <tr ng-repeat="role in vm.showable">
+                                    <td class="pl-4">
+                                        <p class="m-0">
+                                            <a href="{{ '#!/kb/' + role.knowledge_base_id }}">
+                                                {{ role.knowledge_base_name }}
+                                            </a>
+                                            <span class="badge badge-light border border-secondary">{{ role.privacy }}</span>
+                                        </p>
+                                        <small>{{ role.knowledge_base_description }}</small>
+
+
+                                    </td>
+                                    <td class="pr-4 text-right">
+                                        <span class="{{ role.class }}">
+                                            {{ role.role }}
+                                        </span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+<div class="content">
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1>{{ '#' + vm.tag }}</h1>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <nav>
+                    <div class="nav nav-tabs" role="tablist">
+                        <a href="" class="nav-item nav-link active" role="tab">Knowledge Bases</a>
+                    </div>
+                </nav>
+                <br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card-columns">
+                    <div ng-repeat="kb in vm.kbs" class="card mb-2">
+                        <div class="card-body">
+                            <a href="{{ '#!/kb/' + kb.id }}">
+                                <h5>{{ kb.name }}</h5>
+                            </a>
+                            <small>{{ kb.description }}</small>
+                            <br>
+                            <small>
+                                    Collaborators: 
+                                    <a href="{{ '#!/profile/' + collaborator}}" class="badge badge-light border ml-2" ng-repeat="collaborator in kb.collaborators">{{ '@' + collaborator }}</a>
+                                </small>
+                            <br>
+                            <small>
+                                    Tags: 
+                                    <a class="badge badge-light border ml-2" ng-repeat="tag in kb.tags" href="{{ '#!/tag/' + tag }}">{{ tag }}</a>
+                                </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

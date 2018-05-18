@@ -1,0 +1,74 @@
+.content {
+    margin: 100px auto 50px auto;
+}
+
+.content h1 {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.login {
+    max-width: 350px;
+    margin: auto;
+}
+
+.login h1 {
+    margin: 20px auto 50px auto;
+}
+
+.join,
+.recover,
+.verify,
+.explore {
+    max-width: 500px;
+    margin: auto;
+}
+
+.recover h1 {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.login .extra,
+.verify .extra {
+    background-color: #f7f7f7;
+}
+
+.little-note {
+    color: #747474;
+}
+
+.table .icon {
+    width: 17px;
+    padding-left: 15px;
+}
+
+.table .content {}
+
+.table .date {
+    width: 200px;
+}
+
+.table .options {
+    width: 100px;
+}
+
+.table .description {
+    width: 300px;
+}
+
+.table .collaborate-picture {
+    width: 62px;
+}
+
+.table .collaborate-name {
+    padding-top: 18px;
+}
+
+.table .collaborate-role {
+    width: 150px;
+}
+
+.table .collaborate-cancel {
+    width: 100px;
+}

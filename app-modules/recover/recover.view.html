@@ -1,0 +1,42 @@
+<style>
+    body {
+        background-color: #f7f7f7;
+    }
+</style>
+<div class="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="recover">
+                    <h1>Account Recovery</h1>
+                    <br>
+                    <div class="card">
+                        <form ng-submit="vm.send()" role="form">
+                            <div class="card-body">
+                                <p>Please type your email below, if it is in our register we will send you an email to recover your account information.</p>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="fa fa-envelope" style="width:15px;"></i>
+                                            </span>
+                                        </div>
+                                        <input maxlength="60" required type="email" class="form-control" id="email" placeholder="Email" ng-model="vm.email" ng-keyup="vm.validateEmail($event)" onkeypress="return validateEmail(event)">
+                                    </div>
+                                </div>
+                                <button type="submit" ng-disabled="vm.dataLoading || !vm.isValid" class="btn btn-primary">
+                                    <div ng-if="vm.dataLoading">
+                                        <i class="fa fa-spinner fa-pulse"></i>
+                                    </div>
+                                    <div ng-if="!vm.dataLoading">
+                                        Send
+                                    </div>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

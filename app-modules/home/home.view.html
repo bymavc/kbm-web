@@ -1,0 +1,112 @@
+<div class="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-8">
+                <div class="row">
+                    <div class="col-12">
+                        <h1 class="mb-4">Home</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <nav>
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <a href="" class="nav-item nav-link active" id="nav-users-tab" data-toggle="tab" data-target="#nav-users" role="tab" aria-controls="nav-users" aria-selected="true">Users</a>
+                                <a href="" class="nav-item nav-link" id="nav-kb-tab" data-toggle="tab" data-target="#nav-kb" role="tab" aria-controls="nav-kb" aria-selected="false">Knowledge Bases</a>
+                                <a href="" class="nav-item nav-link" id="nav-tags-tab" data-toggle="tab" data-target="#nav-tags" role="tab" aria-controls="nav-tags" aria-selected="false">Tags</a>
+                            </div>
+                        </nav>
+                        <br>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="nav-users" role="tabpanel" aria-labelledby="nav-users-tab">
+                                <div ng-repeat="user in vm.users" class="card mb-2">
+                                    <div class="card-body d-flex justify-content-start">
+                                        <div class="mr-4">
+                                            <img class="rounded" src="{{ user.profile_picture }}" alt="" style="max-width: 70px;">
+                                        </div>
+                                        <div>
+                                            <a href="{{ '#!/profile/' + user.username }}">
+                                                <h5 class="mb-3">{{ user.username }}</h5>
+                                            </a>
+                                            <a ng-repeat="kb in user.knowledge_bases" class="badge badge-light border mr-2 mb-0" href="{{ '#!/kb/' + kb.id }}">{{ kb.name }}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade show" id="nav-kb" role="tabpanel" aria-labelledby="nav-kb-tab">
+                                <div ng-repeat="public in vm.publics" class="card  mb-2">
+                                    <div class="card-body">
+                                        <a href="{{ '#!/kb/' + public.id }}">
+                                            <h5>{{ public.name }}</h5>
+                                        </a>
+                                        <small>{{ public.description }}</small>
+                                        <br>
+                                        <small>
+                                            Collaborators: 
+                                            <a href="{{ '#!/profile/' + collaborator}}" class="badge badge-light border ml-2" ng-repeat="collaborator in public.collaborators">{{ '@' + collaborator }}</a>
+                                        </small>
+                                        <br>
+                                        <small>
+                                            Tags: 
+                                            <a class="badge badge-light border ml-2" ng-repeat="tag in public.tags" href="{{ '#!/tag/' + tag }}">{{ tag }}</a>
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade show" id="nav-tags" role="tabpanel" aria-labelledby="nav-tags-tab">
+                                <a ng-repeat="tag in vm.tags" class="badge badge-light border m-2" href="{{ '#!/tag/' + tag }}">{{ tag }}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card mb-2">
+                    <div class="card-header">Your collaborations</div>
+                    <ul class="list-group list-group-flush">
+                        <li ng-repeat="collaboration in vm.collaborations" class="list-group-item">
+                            <a href="{{ '#!/kb/' + collaboration.knowledge_base_id }}">
+                                {{ collaboration.knowledge_base_name }}
+                            </a>
+                            <div class="float-right">
+                                <span class="{{ collaboration.class }}">
+                                    {{ collaboration.role }}
+                                </span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-header">Your knowledge bases</div>
+                    <div class="card-header">
+                        <a href="#!/new/kb" class="btn btn-primary btn-sm btn-block">New Knowledge Base</a>
+                    </div>
+                    <div class="card-header">
+                        <ul class="nav nav-pills card-header-pills nav-justified">
+                            <li class="nav-item">
+                                <a href="" class="nav-link active" ng-click="vm.showAll()" data-toggle="pill" role="tab" aria-selected="true">All</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="" class="nav-link" ng-click="vm.showPublic()" data-toggle="pill" role="tab" aria-selected="false">Public</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="" class="nav-link" ng-click="vm.showPrivate()" data-toggle="pill" role="tab" aria-selected="false">Private</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li ng-repeat="kb in vm.kbs" class="list-group-item">
+                            <a href="{{ '#!/kb/' + kb.knowledge_base_id }}">
+                                {{ kb.knowledge_base_name }}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

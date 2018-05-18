@@ -1,0 +1,116 @@
+<div class="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <a href="{{ '#!/settings/profile'}}" class="nav-item nav-link active" role="tab" aria-controls="nav-profile" aria-selected="true">
+                            Profile Settings
+                        </a>
+                    </div>
+                </nav>
+                <br>
+            </div>
+        </div>
+        <div class="row" ng-show="vm.dataLoading">
+            <div class="text-center col-12">
+                <i ng-class="vm.loaderClass"></i> {{ vm.loaderMessage }}
+            </div>
+        </div>
+        <div class="row" ng-show="!vm.dataLoading">
+            <div class="col-md-12 col-lg-6">
+                <div class="text-center">
+                    <div style="height: 350px">
+                        <img class="img-thumbnail" src="{{vm.profile.profile_picture}}" id="display" alt="">
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <div class="custom-file">
+                            <input class="custom-file-input" type="file" id="image" ng-disabled="!vm.edition" />
+                            <label class="custom-file-label" for="image">Choose Image</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-6">
+                <div class="form-group">
+                    <div>Registered since {{ vm.profile.registered | date: 'MMM d, y h:mm a' }}</div>
+                </div>
+                <div class="form-group">
+                    <div>Last update on {{ vm.profile.updated | date: 'MMM d, y h:mm a' }}</div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-sm-3">Username</label>
+                    <div class="col-sm-9">
+                        <input type="text" maxlength="20" class="form-control" ng-model="vm.profile.username" ng-disabled="!vm.edition" onkeypress="return validateUsername(event)" , ng-keyup="vm.validateUsername($event)">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-sm-3">First Name</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" ng-model="vm.profile.first_name" ng-disabled="!vm.edition" onkeypress="return validateUsername(event)" , ng-keyup="vm.validateUsername($event)">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-sm-3">Last Name</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" ng-model="vm.profile.last_name" ng-disabled="!vm.edition">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-sm-3">Email</label>
+                    <div class="col-sm-9">
+                        <input type="email" class="form-control" ng-model="vm.profile.email" ng-disabled="!vm.edition">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-sm-3">New Password</label>
+                    <div class="col-sm-9">
+                        <input type="password" class="form-control" ng-model="vm.profile.new_password" ng-disabled="!vm.edition">
+                    </div>
+                </div>
+                <div ng-if="!vm.edition" class="text-right">
+                    <button class="btn btn-primary" ng-click="vm.enableEdition()">Edit User Information</button>
+                </div>
+                <div ng-if="vm.edition" class="text-right">
+                    <button class="btn btn-secondary" ng-click="vm.disableEdition()">Cancel</button>
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#updateModal" ng-disabled="!(vm.firstNameIsValid && vm.lastNameIsValid && vm.usernameIsValid && vm.emailIsValid && vm.passwordIsValid)">Update user information</button>
+                </div>
+                <div class="modal fade" id="updateModal" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <form ng-submit="vm.update()" role="form">
+                                <div class="modal-header">
+                                    <h6 class="modal-title">Write your password</h6>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-lock" style="width:15px;"></i>
+                                                </span>
+                                            </div>
+                                            <input required type="password" maxlength="40" class="form-control" ng-model="vm.profile.password" placeholder="Password">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button ng-disabled="vm.dataLoading" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                    <button type="submit" ng-disabled="vm.dataLoading" class="btn btn-primary">
+                                        <div ng-if="vm.dataLoading">
+                                            <i class="fa fa-spinner fa-pulse"></i>
+                                        </div>
+                                        <div ng-if="!vm.dataLoading">
+                                            Update user information
+                                        </div>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,86 @@
+<style>
+    body {
+        background-color: #f7f7f7;
+    }
+</style>
+<div class="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="verify">
+                    <h1>We need to verify your email address</h1>
+                    <br>
+                    <div class="card">
+                        <form ng-submit="vm.verify()" role="form">
+                            <div class="card-body">
+                                <p>We have sent a verification code to your email. Please insert your verification code to continue.</p>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="fa fa-barcode" style="width:15px;"></i>
+                                            </span>
+                                        </div>
+                                        <input type="text" class="form-control" id="code" placeholder="Code" ng-model="vm.code" ng-keyup="vm.validateCode($event)">
+                                    </div>
+
+                                </div>
+                                <div class="d-flex justify-content-end align-items-center">
+                                    <button type="submit" ng-disabled="vm.dataLoading || !vm.isValid" class="btn btn-primary btn-block">
+                                        <div ng-if="vm.dataLoading">
+                                            <i class="fa fa-spinner fa-pulse"></i>
+                                        </div>
+                                        <div ng-if="!vm.dataLoading">
+                                            Verify
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <br>
+                    <div class="card extra">
+                        <div class="card-body text-center">
+                            <a href="" data-toggle="modal" data-target="#emailModal">You have not received any verification code? </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="emailModal" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form ng-submit="vm.resend()" role="form">
+                    <div class="modal-header">
+                        <h6 class="modal-title">Request for a new verification code</h6>
+                    </div>
+                    <div class="modal-body">
+                        <p>Please type your registered email to send a new verification code.</p>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fa fa-envelope" style="width:15px;"></i>  
+                                    </span>
+                                </div>
+                                <input required type="email" name="email" maxlength="40" class="form-control" id="email" ng-model="vm.email" placeholder="Email" ng-keyup="vm.validateEmail($event)" onkeypress="return validateEmail(event)">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button ng-disabled="vm.dataLoading" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" ng-disabled="vm.dataLoading || !vm.isValid" class="btn btn-primary">
+                            <div ng-if="vm.dataLoading">
+                                <i class="fa fa-spinner fa-pulse"></i>
+                            </div>
+                            <div ng-if="!vm.dataLoading">
+                                Request
+                            </div>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

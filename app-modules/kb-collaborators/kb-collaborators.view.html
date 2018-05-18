@@ -1,0 +1,94 @@
+<div class="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <a href="{{ '#!/kb/' + vm.kb.id }}" class="nav-item nav-link" role="tab" aria-controls="nav-home" aria-selected="false">
+                            <i class="fa fa-folder-open"></i>
+                            Content
+                        </a>
+                        <a href="{{ '#!/settings/options/kb/' + vm.kb.id }}" class="nav-item nav-link active" role="tab" aria-controls="nav-profile" aria-selected="true">
+                            <i class="fa fa-cog"></i>
+                            Settings
+                        </a>
+                    </div>
+                </nav>
+                <br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <div class="list-group">
+                    <a href="{{ '#!/settings/options/kb/' + vm.kb.id }}" class="list-group-item list-group-item-action">
+                        <i class="fa fa-wrench" style="width: 30px;"></i>
+                        Options
+                    </a>
+                    <a href="{{ '#!/settings/collaborators/kb/' + vm.kb.id }}" class="list-group-item list-group-item-action active">
+                        <i class="fa fa-users" style="width: 30px;"></i>
+                        Collaborators
+                    </a>
+                </div>
+            </div>
+            <div class="col-9">
+                <div class="card">
+                    <div class="card-header">
+                        Collaborators
+                    </div>
+                    <table class="table table-hover">
+                        <tbody>
+                            <tr ng-repeat="collaborator in vm.permissions">
+                                <td class="collaborate-picture">
+                                    <img src="{{ collaborator.profile_picture }}" class="img-fluid rounded">
+                                </td>
+                                <td class="collaborate-name">
+                                    {{ collaborator.first_name + " " + collaborator.last_name + "/"}}
+                                    <strong>{{ collaborator.username }}</strong>
+                                </td>
+                                <td class="text-right collaborate-role">
+                                    <select class="custom-select" ng-model="collaborator.role" ng-change="vm.update()">
+                                        <option
+                                                ng-repeat="role in vm.roles"
+                                                ng-selected="collaborator.role == role.role"
+                                                value="{{ role.role }}">
+                                            {{ role.label }}
+                                        </option>
+                                    </select>
+                                </td>
+                                <td class="collaborate-cancel">
+                                    <button class="btn btn-danger" ng-click="vm.deletePermission(collaborator.user)">Cancel</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="card-footer">
+                        <h6>Search by username or email</h6>
+                        <p>You can find a KBM user by their email or username to give them an invitation to collaborate to your knowledge base.</p>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fa fa-search" style="width:15px;"></i>
+                                    </span>
+                                </div>
+                                <input required type="text" name="search-box" class="form-control" id="search-box" data-toggle="dropdown" ng-model="vm.search" ng-change="vm.findUsers()">
+                                <div class="dropdown-menu">
+                                    <a href="" class="dropdown-item" ng-repeat="user in vm.usersFound" ng-click="vm.select(user.id)">
+                                        <img src="{{ user.profile_picture }}" class="img-fluid rounded" style="max-height: 20px; margin-right: 10px;">
+                                        <small>{{ user.first_name + " " + user.last_name + "/" + user.username + " - " + user.email }}</small>
+                                    </a>
+                                </div>
+                                <span class="input-group-append">
+                                    <button class="btn btn-secondary" ng-click="vm.addPermission()">
+                                        <i class="fa fa-plus mr-2"></i>
+                                        Add Collaborator
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

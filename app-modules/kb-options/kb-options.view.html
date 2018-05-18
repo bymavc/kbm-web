@@ -1,0 +1,271 @@
+<div class="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <a href="{{ '#!/kb/' + vm.kb.id }}" class="nav-item nav-link" role="tab" aria-controls="nav-home" aria-selected="false">
+                            <i class="fa fa-folder-open"></i> Content
+                        </a>
+                        <a href="{{ '#!/settings/options/kb/' + vm.kb.id }}" class="nav-item nav-link active" role="tab" aria-controls="nav-profile" aria-selected="true">
+                            <i class="fa fa-cog"></i> Settings
+                        </a>
+                    </div>
+                </nav>
+                <br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <div class="list-group">
+                    <a href="{{ '#!/settings/options/kb/' + vm.kb.id }}" class="list-group-item list-group-item-action active">
+                        <i class="fa fa-wrench" style="width: 30px;"></i> Options
+                    </a>
+                    <a href="{{ '#!/settings/collaborators/kb/' + vm.kb.id }}" class="list-group-item list-group-item-action">
+                        <i class="fa fa-users" style="width: 30px;"></i> Collaborators
+                    </a>
+                </div>
+            </div>
+            <div class="col-9">
+                <h5>Settings</h5>
+                <br>
+                <div class="form-group">
+                    <input required type="text" maxlength="40" class="form-control" ng-model="vm.kb.name">
+                </div>
+                <div class="form-group">
+                    <input required type="text" maxlength="140" class="form-control" ng-model="vm.kb.description">
+                </div>
+                <button class="btn btn-primary" ng-click="vm.update()">Update Knowledge Base information</button>
+                <hr>
+                <h5>Danger Zone</h5>
+                <br>
+                <div class="card border-danger">
+                    <div class="list-group list-group-flush">
+                        <div ng-if="!vm.isPublic" class="list-group-item">
+                            <div class="d-flex justify-content-between">
+                                <div class="pr-2">
+                                    <h6 class="card-title">Make public</h6>
+                                    <p>Make this knowledge base visible for anyone.</p>
+                                </div>
+                                <div>
+                                    <button class="btn btn-outline-danger" data-toggle="modal" data-target="#makePublicModal">Make Public</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-if="vm.isPublic" class="list-group-item">
+                            <div class="d-flex justify-content-between">
+                                <div class="pr-2">
+                                    <h6 class="card-title">Make private</h6>
+                                    <p>Making this knowledge base private will turn its visibility restricted for anyone who is not a collaborator.</p>
+                                </div>
+                                <div>
+                                    <button class="btn btn-outline-danger" data-toggle="modal" data-target="#makePrivateModal">Make Private</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group-item">
+                            <div class="d-flex justify-content-between">
+                                <div class="pr-2">
+                                    <h6 class="card-title">Transfer Ownership</h6>
+                                    <p>Transfer this knowledge base ownership to another user.</p>
+                                </div>
+                                <div>
+                                    <button class="btn btn-outline-danger" data-toggle="modal" data-target="#ownerModal">Transfer</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group-item">
+                            <div class="d-flex justify-content-between">
+                                <div class="pr-2">
+                                    <h6 class="card-title">Delete this knowledge base</h6>
+                                    <p>This action will permanently delete the knowledge base and all its content. Please be certain.</p>
+                                </div>
+                                <div>
+                                    <button class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade options-modal" id="makePublicModal" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form ng-submit="vm.changePrivacy()" role="form">
+                <div class="modal-header">
+                    <h6 class="modal-title">Change Privacy</h6>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>This will give free access to any user to see your knowledge base, you decide who collaborates to it.</p>
+                    <p>
+                        <strong class="text-danger">Please type the name of the knowledge base to confirm.</strong>
+                    </p>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fa fa-book" style="width:15px;"></i>
+                                </span>
+                            </div>
+                            <input required type="text" maxlength="70" class="form-control" ng-model="vm.name">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" ng-disabled="vm.dataLoading" class="btn btn-outline-danger btn-block">
+                        <div ng-if="vm.dataLoading">
+                            <i class="fa fa-spinner fa-pulse"></i>
+                        </div>
+                        <div ng-if="!vm.dataLoading">
+                            Change Privacy
+                        </div>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade options-modal" id="makePrivateModal" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form ng-submit="vm.changePrivacy()" role="form">
+                <div class="modal-header">
+                    <h6 class="modal-title">Change Privacy</h6>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>This will deny access to anyone who is not a collaborator of this knowledge base.</p>
+                    <p> <strong class="text-danger">Please type the name of the knowledge base to confirm.</strong>
+                    </p>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fa fa-book" style="width:15px;"></i>
+                                </span>
+                            </div>
+                            <input required type="text" maxlength="70" class="form-control" ng-model="vm.name">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" ng-disabled="vm.dataLoading" class="btn btn-outline-danger btn-block">
+                        <div ng-if="vm.dataLoading">
+                            <i class="fa fa-spinner fa-pulse"></i>
+                        </div>
+                        <div ng-if="!vm.dataLoading">
+                            Change Privacy
+                        </div>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade options-modal" id="ownerModal" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form ng-submit="vm.changeOwnership()" role="form">
+                <div class="modal-header">
+                    <h6 class="modal-title">Transfer Ownership</h6>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Write the username or email address of the user you want to transfer this knowledge base ownership to</p>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fa fa-search" style="width:15px;"></i>
+                                </span>
+                            </div>
+                            <input required type="text" name="search-box" class="form-control" id="search-box" data-toggle="dropdown" ng-model="vm.search" ng-change="vm.findUsers()">
+                            <div class="dropdown-menu">
+                                <a href="" class="dropdown-item" ng-repeat="user in vm.usersFound" ng-click="vm.select(user.id)">
+                                    <img src="{{ user.profile_picture }}" class="img-fluid rounded" style="max-height: 20px; margin-right: 10px;">
+                                    <small>{{ user.first_name + " " + user.last_name + "/" + user.username + " - " + user.email }}</small>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <p> <strong class="text-danger">Please type the name of the knowledge base to confirm.</strong>
+                    </p>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fa fa-book" style="width:15px;"></i>
+                                </span>
+                            </div>
+                            <input required type="text" maxlength="70" class="form-control" ng-model="vm.name">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" ng-disabled="vm.dataLoading" class="btn btn-outline-danger btn-block">
+                        <div ng-if="vm.dataLoading">
+                            <i class="fa fa-spinner fa-pulse"></i>
+                        </div>
+                        <div ng-if="!vm.dataLoading">
+                            Transfer Ownership
+                        </div>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade options-modal" id="deleteModal" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form ng-submit="vm.deleteKB()" role="form">
+                <div class="modal-header">
+                    <h6 class="modal-title">Delete Knowledge Base</h6>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>This operation will completely delete all this knowledge base information</p>
+
+                    <p> <strong class="text-danger">Please type the name of the knowledge base to confirm.</strong>
+                    </p>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fa fa-book" style="width:15px;"></i>
+                                </span>
+                            </div>
+                            <input required type="text" maxlength="70" class="form-control" ng-model="vm.name">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" ng-disabled="vm.dataLoading" class="btn btn-outline-danger btn-block">
+                        <div ng-if="vm.dataLoading">
+                            <i class="fa fa-spinner fa-pulse"></i>
+                        </div>
+                        <div ng-if="!vm.dataLoading">
+                            Delete Knowledge Base
+                        </div>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

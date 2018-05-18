@@ -1,0 +1,70 @@
+<style>
+    body {
+        background-color: #f7f7f7;
+    }
+</style>
+<div class="content">
+    <div class="container">
+        <div class="login">
+            <h1 class="text-center">Log in to KBM</h1>
+            <div class="card">
+                <div class="card-body">
+                    <form name="form" ng-submit="vm.login()" role="form">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fa fa-user" style="width:15px;"></i>
+                                    </span>
+                                </div>
+                                <input required type="text" maxlength="20" name="username" class="form-control" id="username" ng-model="vm.credentials.username" placeholder="Username or Email" onkeypress="return validateUsername(event)">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fa fa-lock" style="width:15px;"></i>
+                                    </span>
+                                </div>
+                                <input required type="password" maxlength="20" name="password" class="form-control" id="password" ng-model="vm.credentials.password" placeholder="********" onkeypress="return validateUsername(event)">
+                                <div class="input-group-append popover-item" onclick="dismiss()" title="Forgot Password?" data-content="Click to recover your account information.">
+                                    <a class="btn btn-secondary" href="#!/recover">
+                                        <i class="fa fa-question" style="width:15px;"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" ng-disabled="vm.dataLoading" class="btn btn-primary btn-block">
+                            <div ng-if="vm.dataLoading">
+                                <i class="fa fa-spinner fa-pulse"></i>
+                            </div>
+                            <div ng-if="!vm.dataLoading">
+                                Log in
+                            </div>
+                        </button>
+                    </form>
+
+                </div>
+            </div>
+            <br>
+            <div class="card extra">
+                <div class="card-body text-center">
+                    You don't have an account? <a href="#!/join">Sign up</a>
+                </div>
+            </div>
+            <br>
+        </div>
+    </div>
+</div>
+<script>
+    $(function() {
+        $('.popover-item').popover({
+            trigger: "hover"
+        });
+    });
+
+    function dismiss() {
+        $('.popover-item').popover('hide');
+    }
+</script>
