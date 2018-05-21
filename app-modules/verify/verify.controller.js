@@ -14,6 +14,7 @@
         vm.resend = resend;
         vm.validateCode = validateCode;
         vm.validateEmail = validateEmail;
+        vm.hidePopover = hidePopover;
         vm.dataLoading = false;
         vm.code = $routeParams.code;
         vm.isValid = false;
@@ -76,5 +77,8 @@
             }
         }
 
+        function hidePopover(event){
+            ValidatorService.Hider(event);
+        }
     }
 })();

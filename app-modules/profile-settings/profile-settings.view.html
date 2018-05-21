@@ -42,31 +42,34 @@
                 <div class="form-group row">
                     <label class="col-form-label col-sm-3">Username</label>
                     <div class="col-sm-9">
-                        <input type="text" maxlength="20" class="form-control" ng-model="vm.profile.username" ng-disabled="!vm.edition" onkeypress="return validateUsername(event)" , ng-keyup="vm.validateUsername($event)">
+                        <input type="text" maxlength="20" ng-class="vm.usernameFormClass" id="username" ng-model="vm.profile.username" ng-disabled="!vm.edition" onkeypress="return validateUsername(event)" ng-keyup="vm.validateUsername($event)" ng-blur="vm.checkUsername($event)">
+                        <small ng-class="vm.uNoteClass">{{ vm.uMessage }}</small>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-form-label col-sm-3">First Name</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" ng-model="vm.profile.first_name" ng-disabled="!vm.edition" onkeypress="return validateUsername(event)" , ng-keyup="vm.validateUsername($event)">
+                        <input type="text" maxlength="20" class="form-control" id="first-name" ng-model="vm.profile.first_name" ng-disabled="!vm.edition" onkeypress="return validateName(event)" ng-keyup="vm.validateName($event)" ng-blur="vm.hidePopover($event)">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-form-label col-sm-3">Last Name</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" ng-model="vm.profile.last_name" ng-disabled="!vm.edition">
+                        <input type="text" maxlength="20" class="form-control" id="last-name" ng-model="vm.profile.last_name" ng-disabled="!vm.edition" onkeypress="return validateName(event)" ng-keyup="vm.validateName($event)" ng-blur="vm.hidePopover($event)">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-form-label col-sm-3">Email</label>
                     <div class="col-sm-9">
-                        <input type="email" class="form-control" ng-model="vm.profile.email" ng-disabled="!vm.edition">
+                        <input type="email" maxlength="60" class="form-control" id="email" ng-model="vm.profile.email" ng-disabled="!vm.edition" onkeypress="return validateEmail(event)" ng-keyup="vm.validateEmail($event)" ng-blur="vm.checkEmail($event)">
+                        <small ng-class="vm.eNoteClass">{{ vm.eMessage }}</small>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-form-label col-sm-3">New Password</label>
                     <div class="col-sm-9">
-                        <input type="password" class="form-control" ng-model="vm.profile.new_password" ng-disabled="!vm.edition">
+                        <input type="password" maxlength="20" class="form-control" id="new-password" ng-model="vm.profile.new_password" ng-disabled="!vm.edition" onkeypress="return validateUsername(event)" ng-keyup="vm.validatePassword($event)" ng-blur="vm.hidePopover($event)">
+                        <small ng-class="vm.pNoteClass">{{ vm.pMessage }}</small>
                     </div>
                 </div>
                 <div ng-if="!vm.edition" class="text-right">
@@ -91,7 +94,7 @@
                                                     <i class="fa fa-lock" style="width:15px;"></i>
                                                 </span>
                                             </div>
-                                            <input required type="password" maxlength="40" class="form-control" ng-model="vm.profile.password" placeholder="Password">
+                                            <input required type="password" maxlength="20" class="form-control" ng-model="vm.profile.password" placeholder="Password">
                                         </div>
                                     </div>
                                 </div>

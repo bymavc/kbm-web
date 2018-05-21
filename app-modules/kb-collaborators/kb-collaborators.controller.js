@@ -37,6 +37,8 @@
         vm.fill = fill;
         vm.select = select;
 
+        vm.findUserLoading = "fa fa-search";
+
         (function initController() {
             AuthService.CheckCredentials(function(response) {
                 if (response.success) {
@@ -118,6 +120,7 @@
         }
 
         function findUsers() {
+            vm.findUserLoading = "fa fa-spinner fa-pulse";
             UserService.Find(vm.search)
                 .then(function(response) {
                     if (response.success) {
@@ -130,8 +133,10 @@
                         vm.usersFound.forEach(function(user) {
                             user.profile_picture = FILES.user.profile + user.profile_picture;
                         });
+                        vm.findUserLoading = "fa fa-search";
                     } else {
                         FlashService.Warning(response.message, response.title);
+                        vm.findUserLoading = "fa fa-search";
                     }
                 });
         }

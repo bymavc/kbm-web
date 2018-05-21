@@ -14,7 +14,7 @@
                                         <i class="fa fa-asterisk" style="width:15px;"></i>
                                     </span>
                                 </div>
-                                <input required type="text" maxlength="20" class="form-control" id="first-name" ng-model="vm.user.first_name" placeholder="First Name" ng-keyup="vm.validateName($event)" onkeypress="return validateName(event)">
+                                <input required type="text" maxlength="20" class="form-control" id="first-name" ng-model="vm.user.first_name" placeholder="First Name" ng-keyup="vm.validateName($event)" onkeypress="return validateName(event)" ng-blur="vm.hidePopover($event)">
                             </div>
                         </div>
                         <div class="form-group">
@@ -24,7 +24,7 @@
                                         <i class="fa fa-asterisk" style="width:15px;"></i>
                                     </span>
                                 </div>
-                                <input required type="text" maxlength="20" class="form-control" id="last-name" ng-model="vm.user.last_name" placeholder="Last Name" ng-keyup="vm.validateName($event)" onkeypress="return validateName(event)">
+                                <input required type="text" maxlength="20" class="form-control" id="last-name" ng-model="vm.user.last_name" placeholder="Last Name" ng-keyup="vm.validateName($event)" onkeypress="return validateName(event)" ng-blur="vm.hidePopover($event)">
                             </div>
                         </div>
                         <div class="form-group">
@@ -34,7 +34,7 @@
                                         <i ng-class="vm.usernameLoading" style="width:15px;"></i>
                                     </span>
                                 </div>
-                                <input required type="text" maxlength="20" ng-class="vm.usernameFormClass" id="username" ng-model="vm.user.username" ng-keyup="vm.validateUsername($event)" placeholder="Username" onkeypress="return validateUsername(event)">
+                                <input required type="text" maxlength="20" ng-class="vm.usernameFormClass" id="username" ng-model="vm.user.username" ng-keyup="vm.validateUsername($event)" placeholder="Username" onkeypress="return validateUsername(event)" ng-blur="vm.checkUsername($event)">
                             </div>
                             <small ng-class="vm.uNoteClass">{{ vm.uMessage }}</small>
                         </div>
@@ -45,7 +45,7 @@
                                         <i ng-class="vm.emailLoading" style="width:15px;"></i>
                                     </span>
                                 </div>
-                                <input required type="email" name="email" maxlength="60" ng-class="vm.emailFormClass" id="email" ng-model="vm.user.email" placeholder="Email" ng-keyup="vm.validateEmail($event)" onkeypress="return validateEmail(event)">
+                                <input required type="email" name="email" maxlength="60" ng-class="vm.emailFormClass" id="email" ng-model="vm.user.email" placeholder="Email" ng-keyup="vm.validateEmail($event)" onkeypress="return validateEmail(event)" ng-blur="vm.checkEmail($event)">
                             </div>
                             <small ng-class="vm.eNoteClass">{{ vm.eMessage }}</small>
                         </div>
@@ -56,7 +56,7 @@
                                         <i ng-class="vm.passwordLoading" style="width:15px;"></i>
                                     </span>
                                 </div>
-                                <input required type="password" maxlength="20" ng-class="vm.passwordFormClass" id="password" ng-model="vm.user.password" placeholder="Password" ng-keyup="vm.validatePassword($event)">
+                                <input required type="password" maxlength="20" ng-class="vm.passwordFormClass" id="password" ng-model="vm.user.password" placeholder="Password" onkeypress="return validateUsername(event)" ng-keyup="vm.validatePassword($event)" ng-blur="vm.hidePopover($event)">
                             </div>
                             <small ng-class="vm.pNoteClass">{{ vm.pMessage }}</small>
                         </div>

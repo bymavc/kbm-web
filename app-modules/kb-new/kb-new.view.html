@@ -17,12 +17,12 @@
                         </div>
                         <div class="col-sm-8 col-xs-12">
                             <label for="name">Knowledge Base Name</label>
-                            <input required type="text" maxlength="40" class="form-control" id="name" ng-model="vm.kbase.name" placeholder="Most amazing Knowledge Base">
+                            <input required type="text" maxlength="70" class="form-control" id="name" ng-model="vm.kbase.name" placeholder="Most amazing Knowledge Base" onkeypress="return validateGeneric(event)">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="description">Description </label><small class="text-muted"> (optional)</small>
-                        <input required type="text" maxlength="80" class="form-control" id="description" ng-model="vm.kbase.description" placeholder="This is the best knowledge base to ever exist">
+                        <label for="description">Description </label>
+                        <input required type="text" maxlength="140" class="form-control" id="description" ng-model="vm.kbase.description" placeholder="This is the best knowledge base to ever exist" onkeypress="return validateGeneric(event)">
                     </div>
                     <hr>
                     <div class="form-group">

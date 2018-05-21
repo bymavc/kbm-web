@@ -5,12 +5,10 @@
                 <nav>
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                         <a href="{{ '#!/kb/' + vm.kb.id }}" class="nav-item nav-link" role="tab" aria-controls="nav-home" aria-selected="false">
-                            <i class="fa fa-folder-open"></i>
-                            Content
+                            <i class="fa fa-folder-open"></i> Content
                         </a>
                         <a href="{{ '#!/settings/options/kb/' + vm.kb.id }}" class="nav-item nav-link active" role="tab" aria-controls="nav-profile" aria-selected="true">
-                            <i class="fa fa-cog"></i>
-                            Settings
+                            <i class="fa fa-cog"></i> Settings
                         </a>
                     </div>
                 </nav>
@@ -21,12 +19,10 @@
             <div class="col-3">
                 <div class="list-group">
                     <a href="{{ '#!/settings/options/kb/' + vm.kb.id }}" class="list-group-item list-group-item-action">
-                        <i class="fa fa-wrench" style="width: 30px;"></i>
-                        Options
+                        <i class="fa fa-wrench" style="width: 30px;"></i> Options
                     </a>
                     <a href="{{ '#!/settings/collaborators/kb/' + vm.kb.id }}" class="list-group-item list-group-item-action active">
-                        <i class="fa fa-users" style="width: 30px;"></i>
-                        Collaborators
+                        <i class="fa fa-users" style="width: 30px;"></i> Collaborators
                     </a>
                 </div>
             </div>
@@ -68,10 +64,10 @@
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
-                                        <i class="fa fa-search" style="width:15px;"></i>
+                                        <i ng-class="vm.findUserLoading" style="width:15px;"></i>
                                     </span>
                                 </div>
-                                <input required type="text" name="search-box" class="form-control" id="search-box" data-toggle="dropdown" ng-model="vm.search" ng-change="vm.findUsers()">
+                                <input type="text" maxlength="60" name="search-box" class="form-control" id="search-box" data-toggle="dropdown" ng-model="vm.search" ng-change="vm.findUsers()" onkeypress="return validateEmail(event)">
                                 <div class="dropdown-menu">
                                     <a href="" class="dropdown-item" ng-repeat="user in vm.usersFound" ng-click="vm.select(user.id)">
                                         <img src="{{ user.profile_picture }}" class="img-fluid rounded" style="max-height: 20px; margin-right: 10px;">

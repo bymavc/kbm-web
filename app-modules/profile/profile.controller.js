@@ -1,4 +1,4 @@
-(function(){
+(function() {
     'use strict';
 
     angular
@@ -6,7 +6,8 @@
         .controller('ProfileController', ProfileController);
 
     ProfileController.$inject = ['AuthService', 'UserService', '$routeParams', '$location', 'FlashService'];
-    function ProfileController(AuthService, UserService, $routeParams, $location, FlashService){
+
+    function ProfileController(AuthService, UserService, $routeParams, $location, FlashService) {
         var vm = this;
 
         vm.dataLoading = true;
@@ -19,13 +20,15 @@
         vm.tags = [];
         vm.showable = null;
         vm.tag = "none";
+        vm.baseFilter = null;
 
         vm.fill = fill;
         vm.filterByTag = filterByTag;
+        vm.filterByName = filterByName;
 
-        (function initController(){
-            AuthService.CheckCredentials(function(response){
-                if(!response.success){
+        (function initController() {
+            AuthService.CheckCredentials(function(response) {
+                if (!response.success) {
                     $location.path('/');
                 } else {
                     vm.fill();
@@ -33,10 +36,10 @@
             });
         })();
 
-        function fill(){
+        function fill() {
             UserService.GetActivities(vm.username)
-                .then(function(response){
-                    if(response.success){
+                .then(function(response) {
+                    if (response.success) {
                         vm.user = {
                             username: response.username,
                             email: response.email,
@@ -46,11 +49,11 @@
                             actions: response.actions,
                             roles: response.roles
                         };
-                        vm.user.actions.forEach(function(action){
+                        vm.user.actions.forEach(function(action) {
                             action.date = new Date(action.date)
                         });
-                        vm.user.roles.forEach(function(role){
-                            switch (role.role){
+                        vm.user.roles.forEach(function(role) {
+                            switch (role.role) {
                                 case '1':
                                     role.role = "Owner";
                                     role.class = "badge badge-primary";
@@ -64,7 +67,7 @@
                                     role.class = "badge badge-secondary";
                                     break;
                             }
-                            switch(role.privacy){
+                            switch (role.privacy) {
                                 case '1':
                                     role.privacy = "Public";
                                     break;
@@ -72,14 +75,14 @@
                                     role.privacy = "Private";
                                     break;
                             }
-                            role.tags.forEach(function(tag){
+                            role.tags.forEach(function(tag) {
                                 var included = false;
-                                vm.tags.forEach(function(t){
-                                    if(t === tag){
+                                vm.tags.forEach(function(t) {
+                                    if (t === tag) {
                                         included = true;
                                     }
                                 });
-                                if(!included){
+                                if (!included) {
                                     vm.tags.push(tag);
                                 }
                             });
@@ -91,23 +94,43 @@
                 });
         }
 
-        function filterByTag(){
-            if(vm.tag === "none"){
+        function filterByTag() {
+            if (vm.tag === "none") {
                 vm.showable = vm.user.roles;
             } else {
-                vm.showable = vm.user.roles.filter(function(role){
+                vm.showable = vm.user.roles.filter(function(role) {
                     return tagFilter(role.tags)
                 });
             }
-            function tagFilter(tags){
+
+            function tagFilter(tags) {
                 var exists = false;
-                tags.forEach(function (tag){
-                    if(tag === vm.tag){
+                tags.forEach(function(tag) {
+                    if (tag === vm.tag) {
                         exists = true;
                     }
                 });
                 return exists;
             }
+        }
+
+        function filterByName() {
+            if (!vm.baseFilter) {
+                vm.showable = vm.user.roles;
+            } else {
+                vm.showable = vm.user.roles.filter(function(role) {
+                    return nameFilter(role.knowledge_base_name);
+                });
+            }
+
+            function nameFilter(name) {
+                if (name.search(vm.baseFilter) < 0) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+
         }
     }
 })();

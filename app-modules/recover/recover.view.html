@@ -21,7 +21,7 @@
                                                 <i class="fa fa-envelope" style="width:15px;"></i>
                                             </span>
                                         </div>
-                                        <input maxlength="60" required type="email" class="form-control" id="email" placeholder="Email" ng-model="vm.email" ng-keyup="vm.validateEmail($event)" onkeypress="return validateEmail(event)">
+                                        <input maxlength="60" required type="email" class="form-control" id="email" placeholder="Email" ng-model="vm.email" ng-keyup="vm.validateEmail($event)" onkeypress="return validateEmail(event)" ng-blur="vm.hidePopover($event)">
                                     </div>
                                 </div>
                                 <button type="submit" ng-disabled="vm.dataLoading || !vm.isValid" class="btn btn-primary">

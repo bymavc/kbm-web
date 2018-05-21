@@ -21,7 +21,7 @@
                                                 <i class="fa fa-barcode" style="width:15px;"></i>
                                             </span>
                                         </div>
-                                        <input type="text" class="form-control" id="code" placeholder="Code" ng-model="vm.code" ng-keyup="vm.validateCode($event)">
+                                        <input type="text" maxlength="10" class="form-control" id="code" placeholder="Code" ng-model="vm.code" ng-keyup="vm.validateCode($event)" ng-blur="vm.hidePopover($event)" onkeypress="return validateEmail(event)">
                                     </div>
 
                                 </div>
@@ -64,7 +64,7 @@
                                         <i class="fa fa-envelope" style="width:15px;"></i>  
                                     </span>
                                 </div>
-                                <input required type="email" name="email" maxlength="40" class="form-control" id="email" ng-model="vm.email" placeholder="Email" ng-keyup="vm.validateEmail($event)" onkeypress="return validateEmail(event)">
+                                <input required type="email" name="email" maxlength="60" class="form-control" id="email" ng-model="vm.email" placeholder="Email" ng-keyup="vm.validateEmail($event)" onkeypress="return validateEmail(event)" ng-blur="vm.hidePopover($event)">
                             </div>
                         </div>
                     </div>

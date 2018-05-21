@@ -13,6 +13,7 @@
         vm.change = change;
 
         vm.validatePassword = validatePassword;
+        vm.hidePopover = hidePopover;
         vm.isValid = false;
         vm.dataLoading = false;
         vm.code = $routeParams.code;
@@ -49,6 +50,10 @@
             } else {
                 vm.isValid = false;
             }
+        }
+
+        function hidePopover(event){
+            ValidatorService.Hider(event);
         }
     }
 })();

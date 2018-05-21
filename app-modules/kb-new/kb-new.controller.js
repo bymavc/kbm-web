@@ -1,4 +1,4 @@
-(function(){
+(function() {
     'use strict';
 
     angular
@@ -6,7 +6,8 @@
         .controller('KbNewController', KbNewController);
 
     KbNewController.$inject = ['AuthService', 'UserService', '$location', 'KBaseService', 'FlashService'];
-    function KbNewController(AuthService, UserService, $location, KBaseService, FlashService){
+
+    function KbNewController(AuthService, UserService, $location, KBaseService, FlashService) {
         var vm = this;
 
         vm.dataLoading = false;
@@ -20,10 +21,10 @@
             privacy: 1
         };
 
-        (function initController(){
+        (function initController() {
             UserService.GetSelf()
-                .then(function(response){
-                    if(response.success){
+                .then(function(response) {
+                    if (response.success) {
                         vm.owner = {
                             username: response.username,
                             image: FILES.user.profile + response.profile_picture
@@ -34,13 +35,13 @@
                 });
         })();
 
-        function create(){
+        function create() {
             vm.dataLoading = true;
             KBaseService.Create(vm.kbase)
-                .then(function(response){
-                    if(response.success){
+                .then(function(response) {
+                    if (response.success) {
                         FlashService.Success(response.message, response.title);
-                        $location.path('/watch/kb/' + response.id);
+                        $location.path('/kb/' + response.id);
                     } else {
                         FlashService.Error(response.message, response.title);
                     }

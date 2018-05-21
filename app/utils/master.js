@@ -1,11 +1,3 @@
-var inputLength = {
-    username: 20,
-    password: 20,
-    email: 60,
-    firstName: 20,
-    lastName: 20
-}
-
 function validateName(e) {
     key = (document.all) ? e.keyCode : e.which;
     if (key == 8) return true;

@@ -30,10 +30,10 @@
                 <h5>Settings</h5>
                 <br>
                 <div class="form-group">
-                    <input required type="text" maxlength="40" class="form-control" ng-model="vm.kb.name">
+                    <input required type="text" minlength="3" maxlength="70" class="form-control" ng-model="vm.kb.name" onkeypress="return validateGeneric(event)">
                 </div>
                 <div class="form-group">
-                    <input required type="text" maxlength="140" class="form-control" ng-model="vm.kb.description">
+                    <input required type="text" minlength="3" maxlength="140" class="form-control" ng-model="vm.kb.description" onkeypress="return validateGeneric(event)">
                 </div>
                 <button class="btn btn-primary" ng-click="vm.update()">Update Knowledge Base information</button>
                 <hr>
@@ -114,7 +114,7 @@
                                     <i class="fa fa-book" style="width:15px;"></i>
                                 </span>
                             </div>
-                            <input required type="text" maxlength="70" class="form-control" ng-model="vm.name">
+                            <input required type="text" maxlength="70" class="form-control" ng-model="vm.name" onkeypress="return validateGeneric(event)">
                         </div>
                     </div>
                 </div>
@@ -154,7 +154,7 @@
                                     <i class="fa fa-book" style="width:15px;"></i>
                                 </span>
                             </div>
-                            <input required type="text" maxlength="70" class="form-control" ng-model="vm.name">
+                            <input required type="text" maxlength="70" class="form-control" ng-model="vm.name" onkeypress="return validateGeneric(event)">
                         </div>
                     </div>
                 </div>
@@ -210,7 +210,7 @@
                                     <i class="fa fa-book" style="width:15px;"></i>
                                 </span>
                             </div>
-                            <input required type="text" maxlength="70" class="form-control" ng-model="vm.name">
+                            <input required type="text" maxlength="70" class="form-control" ng-model="vm.name" onkeypress="return validateGeneric(event)">
                         </div>
                     </div>
                 </div>
@@ -251,7 +251,7 @@
                                     <i class="fa fa-book" style="width:15px;"></i>
                                 </span>
                             </div>
-                            <input required type="text" maxlength="70" class="form-control" ng-model="vm.name">
+                            <input required type="text" maxlength="70" class="form-control" ng-model="vm.name" onkeypress="return validateGeneric(event)">
                         </div>
                     </div>
                 </div>

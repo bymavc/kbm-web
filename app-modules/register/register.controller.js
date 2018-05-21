@@ -5,9 +5,9 @@
         .module('kbmApp')
         .controller('RegisterController', RegisterController);
 
-    RegisterController.$inject = ['UserService', 'AuthService', '$location', 'FlashService', 'ValidatorService'];
+    RegisterController.$inject = ['UserService', 'AuthService', '$location', 'FlashService', 'ValidatorService', '$scope'];
 
-    function RegisterController(UserService, AuthService, $location, FlashService, ValidatorService) {
+    function RegisterController(UserService, AuthService, $location, FlashService, ValidatorService, $scope) {
         var vm = this;
 
         vm.dataLoading = false;
@@ -38,6 +38,9 @@
         vm.validateEmail = validateEmail;
         vm.validateUsername = validateUsername;
         vm.validatePassword = validatePassword;
+        vm.checkUsername = checkUsername;
+        vm.checkEmail = checkEmail;
+        vm.hidePopover = hidePopover;
 
         (function initController() {
             AuthService.CheckCredentials(function(response) {
@@ -79,49 +82,13 @@
         }
 
         function validateEmail(event) {
-            vm.emailLoading = "fa fa-spinner fa-pulse";
-            if (ValidatorService.Email(event)) {
-                UserService.CheckEmail(vm.user.email)
-                    .then(function(response) {
-                        if (response.success) {
-                            vm.eMessage = response.message;
-                            vm.eNoteClass = "text-success";
-                            vm.emailFormClass = "form-control is-valid";
-                            vm.emailLoading = "fa fa-envelope";
-                            vm.emailIsValid = true;
-                        } else {
-                            vm.eMessage = response.message;
-                            vm.eNoteClass = "text-danger";
-                            vm.emailFormClass = "form-control is-invalid";
-                            vm.emailLoading = "fa fa-envelope";
-                            vm.emailIsValid = false;
-                        }
-                    });
-            } else {
+            if (!ValidatorService.Email(event)) {
                 vm.emailIsValid = false;
             }
         }
 
         function validateUsername(event) {
-            vm.usernameLoading = "fa fa-spinner fa-pulse";
-            if (ValidatorService.Username(event)) {
-                UserService.CheckUsername(vm.user.username)
-                    .then(function(response) {
-                        if (response.success) {
-                            vm.uMessage = response.message;
-                            vm.uNoteClass = "text-success";
-                            vm.usernameFormClass = "form-control is-valid";
-                            vm.usernameLoading = "fa fa-user";
-                            vm.usernameIsValid = true;
-                        } else {
-                            vm.uMessage = response.message;
-                            vm.uNoteClass = "text-danger";
-                            vm.usernameFormClass = "form-control is-invalid";
-                            vm.usernameLoading = "fa fa-user";
-                            vm.usernameIsValid = false;
-                        }
-                    });
-            } else {
+            if (!ValidatorService.Username(event)) {
                 vm.usernameIsValid = false;
             }
         }
@@ -140,6 +107,68 @@
                 vm.passwordLoading = "fa fa-key";
                 vm.passwordIsValid = false;
             }
+        }
+
+        function checkEmail(event){
+            vm.emailLoading = "fa fa-spinner fa-pulse";
+            if (ValidatorService.Email(event)) {
+                UserService.CheckEmail(vm.user.email)
+                .then(function(response) {
+                    if (response.success) {
+                        vm.eMessage = response.message;
+                        vm.eNoteClass = "text-success";
+                        vm.emailFormClass = "form-control is-valid";
+                        vm.emailLoading = "fa fa-envelope";
+                        vm.emailIsValid = true;
+                    } else {
+                        vm.eMessage = response.message;
+                        vm.eNoteClass = "text-danger";
+                        vm.emailFormClass = "form-control is-invalid";
+                        vm.emailLoading = "fa fa-envelope";
+                        vm.emailIsValid = false;
+                    }
+                });
+            } else {
+                vm.eMessage = 'Invalid Email';
+                vm.eNoteClass = "text-danger";
+                vm.emailFormClass = "form-control is-invalid";
+                vm.emailLoading = "fa fa-envelope";
+                vm.emailIsValid = false;
+            }
+            hidePopover(event);
+        }
+
+        function checkUsername(event){
+            vm.usernameLoading = "fa fa-spinner fa-pulse";
+            if (ValidatorService.Username(event)) {
+                UserService.CheckUsername(vm.user.username)
+                .then(function(response) {
+                    if (response.success) {
+                        vm.uMessage = response.message;
+                        vm.uNoteClass = "text-success";
+                        vm.usernameFormClass = "form-control is-valid";
+                        vm.usernameLoading = "fa fa-user";
+                        vm.usernameIsValid = true;
+                    } else {
+                        vm.uMessage = response.message;
+                        vm.uNoteClass = "text-danger";
+                        vm.usernameFormClass = "form-control is-invalid";
+                        vm.usernameLoading = "fa fa-user";
+                        vm.usernameIsValid = false;
+                    }
+                });
+            } else {
+                vm.uMessage = 'Invalid Username';
+                vm.uNoteClass = "text-danger";
+                vm.usernameFormClass = "form-control is-invalid";
+                vm.usernameLoading = "fa fa-user";
+                vm.usernameIsValid = false;
+            }
+            hidePopover(event);
+        }
+
+        function hidePopover(event){
+            ValidatorService.Hider(event);
         }
     }
 })();

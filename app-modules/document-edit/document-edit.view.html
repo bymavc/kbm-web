@@ -18,15 +18,15 @@
                     </div>
                     <div class="form-group">
                         <label for="name">Document Name</label>
-                        <input required id="name" type="text" maxlength="70" class="form-control" name="name" ng-model="vm.document.name" placeholder="Amazingly Informative Document">
+                        <input required id="name" type="text" maxlength="70" class="form-control" name="name" ng-model="vm.document.name" placeholder="Amazingly Informative Document" onkeypress="return validateGeneric(event)">
                     </div>
                     <div class="form-group">
                         <label for="description">Description <small class="text-secondary">(Optional)</small></label>
-                        <input id="description" maxlength="140" type="text" class="form-control" name="description" ng-model="vm.document.description" placeholder="This is a really informative documents that guides you through some process">
+                        <input id="description" maxlength="140" type="text" class="form-control" name="description" ng-model="vm.document.description" placeholder="This is a really informative documents that guides you through some process" onkeypress="return validateGeneric(event)">
                     </div>
                     <div class="form-group">
                         <label for="content">Content</label>
-                        <textarea required name="content" id="content" class="form-control" ng-model="vm.document.content" cols="30" rows="10"></textarea>
+                        <textarea required name="content" id="content" class="form-control" ng-model="vm.document.content" cols="30" rows="30"></textarea>
                     </div>
                     <hr>
                     <div class="form-group row">
@@ -37,7 +37,7 @@
                                         <i class="fa fa-tag"></i>
                                     </span>
                                 </span>
-                                <input id="tags" name="tags" maxlength="20" class="form-control" type="text" ng-model="vm.tag" placeholder="Write a Tag">
+                                <input id="tags" name="tags" maxlength="20" class="form-control" type="text" ng-model="vm.tag" placeholder="Write a Tag" onkeypress="return validateGeneric(event)">
                                 <span class="input-group-append">
                                     <a href="" class="btn btn-secondary" ng-click="vm.addTag()">
                                         <i class="fa fa-plus"></i>

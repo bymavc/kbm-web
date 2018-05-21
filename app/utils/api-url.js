@@ -46,7 +46,8 @@ var API = {
         new: root + "doc/new.php",
         update: root + "doc/update.php",
         delete: root + "doc/delete.php",
-        get: root + "doc/get.php?id="
+        get: root + "doc/get.php?id=", 
+        download: root + "doc/download.php?id="
     },
     tag: {
         getAll: root + "tag/getAll.php"

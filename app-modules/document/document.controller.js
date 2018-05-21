@@ -20,6 +20,7 @@
         vm.folder = [];
         vm.fill = fill;
         vm.deleteDocument = deleteDocument;
+        vm.downloadDocument = downloadDocument;
 
         (function initController() {
             AuthService.CheckCredentials(function(response) {
@@ -64,6 +65,12 @@
                         vm.dataLoading = false;
                     }
                 });
+        }
+
+        function downloadDocument(){
+            vm.dataLoading = true;
+            DocumentService.Download(vm.document.id);
+            vm.dataLoading = false;
         }
     }
 })();

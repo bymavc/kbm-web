@@ -14,9 +14,13 @@
         vm.edition = false;
         vm.loaderClass = "fa fa-spinner fa-spin";
         vm.loaderMessage = "Loading Information...";
+        var username;
+        var email;
         vm.profile = null;
         vm.imageSelected = false;
         vm.oldProfilePicture = null;
+
+        vm.usernameFormClass = "form-control";
 
         vm.firstNameIsValid = true;
         vm.lastNameIsValid = true;
@@ -28,6 +32,9 @@
         vm.validateEmail = validateEmail;
         vm.validateUsername = validateUsername;
         vm.validatePassword = validatePassword;
+        vm.checkUsername = checkUsername;
+        vm.checkEmail = checkEmail;
+        vm.hidePopover = hidePopover;
 
         vm.fill = fill;
         vm.update = update;
@@ -68,6 +75,8 @@
                         });
                         vm.profile.registered = vm.profile.register[0].date;
                         vm.profile.updated = vm.profile.register[vm.profile.register.length - 1].date;
+                        username = vm.profile.username;
+                        email = vm.profile.email;
                         vm.dataLoading = false;
                     } else {
                         FlashService.Error(response.message, response.title);
@@ -163,67 +172,104 @@
         }
 
         function validateEmail(event) {
-            vm.emailLoading = "fa fa-spinner fa-pulse";
-            if (ValidatorService.Email(event)) {
-                UserService.CheckEmail(vm.profile.email)
-                    .then(function(response) {
-                        if (response.success) {
-                            vm.eMessage = response.message;
-                            vm.eNoteClass = "text-success";
-                            vm.emailFormClass = "form-control is-valid";
-                            vm.emailLoading = "fa fa-envelope";
-                            vm.emailIsValid = true;
-                        } else {
-                            vm.eMessage = response.message;
-                            vm.eNoteClass = "text-danger";
-                            vm.emailFormClass = "form-control is-invalid";
-                            vm.emailLoading = "fa fa-envelope";
-                            vm.emailIsValid = false;
-                        }
-                    });
-            } else {
+            if (!ValidatorService.Email(event)) {
                 vm.emailIsValid = false;
             }
         }
 
         function validateUsername(event) {
-            vm.usernameLoading = "fa fa-spinner fa-pulse";
-            if (ValidatorService.Username(event)) {
-                UserService.CheckUsername(vm.profile.username)
-                    .then(function(response) {
-                        if (response.success) {
-                            vm.uMessage = response.message;
-                            vm.uNoteClass = "text-success";
-                            vm.usernameFormClass = "form-control is-valid";
-                            vm.usernameLoading = "fa fa-user";
-                            vm.usernameIsValid = true;
-                        } else {
-                            vm.uMessage = response.message;
-                            vm.uNoteClass = "text-danger";
-                            vm.usernameFormClass = "form-control is-invalid";
-                            vm.usernameLoading = "fa fa-user";
-                            vm.usernameIsValid = false;
-                        }
-                    });
-            } else {
+            if (!ValidatorService.Username(event)) {
                 vm.usernameIsValid = false;
             }
         }
 
         function validatePassword(event) {
-            if (ValidatorService.Password(event)) {
-                vm.pMessage = "Valid password";
-                vm.pNoteClass = "text-success";
-                vm.passwordFormClass = "form-control is-valid";
-                vm.passwordLoading = "fa fa-key";
+            if (!vm.profile.new_password) {
+                vm.pMessage = "No password provided";
+                vm.pNoteClass = "text-secondary";
+                vm.passwordFormClass = "form-control";
                 vm.passwordIsValid = true;
             } else {
-                vm.pMessage = "Invalid password";
-                vm.pNoteClass = "text-danger";
-                vm.passwordFormClass = "form-control is-invalid";
-                vm.passwordLoading = "fa fa-key";
-                vm.passwordIsValid = false;
+                if (ValidatorService.Password(event)) {
+                    vm.pMessage = "Valid password";
+                    vm.pNoteClass = "text-success";
+                    vm.passwordFormClass = "form-control is-valid";
+                    vm.passwordIsValid = true;
+                } else {
+                    vm.pMessage = "Invalid password";
+                    vm.pNoteClass = "text-danger";
+                    vm.passwordFormClass = "form-control is-invalid";
+                    vm.passwordIsValid = false;
+                }
             }
+        }
+
+        function checkEmail(event) {
+            if (ValidatorService.Email(event)) {
+                if (vm.profile.email === email) {
+                    vm.eMessage = "Is your current Email";
+                    vm.eNoteClass = "text-secondary";
+                    vm.emailFormClass = "form-control";
+                    vm.emailIsValid = true;
+                } else {
+                    UserService.CheckEmail(vm.profile.email)
+                        .then(function(response) {
+                            if (response.success) {
+                                vm.eMessage = response.message;
+                                vm.eNoteClass = "text-success";
+                                vm.emailFormClass = "form-control is-valid";
+                                vm.emailIsValid = true;
+                            } else {
+                                vm.eMessage = response.message;
+                                vm.eNoteClass = "text-danger";
+                                vm.emailFormClass = "form-control is-invalid";
+                                vm.emailIsValid = false;
+                            }
+                        });
+                }
+            } else {
+                vm.eMessage = 'Invalid Email';
+                vm.eNoteClass = "text-danger";
+                vm.emailFormClass = "form-control is-invalid";
+                vm.emailIsValid = false;
+            }
+            hidePopover(event);
+        }
+
+        function checkUsername(event) {
+            if (ValidatorService.Username(event)) {
+                if (vm.profile.username === username) {
+                    vm.uMessage = 'Is your current Username';
+                    vm.uNoteClass = "text-secondary";
+                    vm.usernameFormClass = "form-control";
+                    vm.usernameIsValid = true;
+                } else {
+                    UserService.CheckUsername(vm.profile.username)
+                        .then(function(response) {
+                            if (response.success) {
+                                vm.uMessage = response.message;
+                                vm.uNoteClass = "text-success";
+                                vm.usernameFormClass = "form-control is-valid";
+                                vm.usernameIsValid = true;
+                            } else {
+                                vm.uMessage = response.message;
+                                vm.uNoteClass = "text-danger";
+                                vm.usernameFormClass = "form-control is-invalid";
+                                vm.usernameIsValid = false;
+                            }
+                        });
+                }
+            } else {
+                vm.uMessage = 'Invalid Username';
+                vm.uNoteClass = "text-danger";
+                vm.usernameFormClass = "form-control is-invalid";
+                vm.usernameIsValid = false;
+            }
+            hidePopover(event);
+        }
+
+        function hidePopover(event) {
+            ValidatorService.Hider(event);
         }
     }
 })();

@@ -8,6 +8,7 @@
     function ValidatorService() {
         var service = {};
 
+        service.Hider = Hider;
         service.Name = Name;
         service.Email = Email;
         service.Username = Username;
@@ -15,6 +16,10 @@
         service.Code = Code;
 
         return service;
+
+        function Hider(event) {
+            hideMessage(event.target);
+        }
 
         function Name(event) {
             var element = event.target;
@@ -24,7 +29,7 @@
                 maxlength: 20,
                 restriction: "Must Contain only letters",
                 tester: function(value) {
-                    var regex = /^[a-zA-Z]+$/;
+                    var regex = /[A-Za-z\sáéíóúñÁÉÍÓÚÑ\']/;
                     return regex.test(value);
                 },
             };

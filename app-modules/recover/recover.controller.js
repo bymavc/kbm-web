@@ -12,6 +12,7 @@
 
         vm.send = send;
         vm.validateEmail = validateEmail;
+        vm.hidePopover = hidePopover;
         vm.isValid = false;
         vm.dataLoading = false;
 
@@ -43,6 +44,10 @@
             } else {
                 vm.isValid = false;
             }
+        }
+
+        function hidePopover(event){
+            ValidatorService.Hider(event);
         }
     }
 })();

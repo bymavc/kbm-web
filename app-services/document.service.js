@@ -5,15 +5,16 @@
         .module('kbmApp')
         .factory('DocumentService', DocumentService);
 
-    DocumentService.$inject = ['$http', '$cookies'];
+    DocumentService.$inject = ['$http', '$cookies', '$window'];
 
-    function DocumentService($http, $cookies) {
+    function DocumentService($http, $cookies, $window) {
         let service = {};
 
         service.Create = Create;
         service.Update = Update;
         service.Get = Get;
         service.Delete = Delete;
+        service.Download = Download;
 
         return service;
 
@@ -41,7 +42,11 @@
             return $http.post(
                 API.doc.delete,
                 id, { headers: { 'Authorization': $cookies.get('kbmAuth') } }
-            ).then(handleSuccess, handleError("Error deleting document"))
+            ).then(handleSuccess, handleError("Error deleting document"));
+        }
+
+        function Download(id){
+            $window.open(API.doc.download + id);
         }
 
         //private functions

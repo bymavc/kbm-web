@@ -7,7 +7,7 @@
                 <div class="mb-4">
                     <span ng-repeat="tag in vm.document.tags" class="badge badge-light border mr-2 mb-2"><a href="{{ '#!/tag/'+ tag }}">{{ tag }}</a></span>
                     <div class="float-right">
-                        <a href="" class="text-secondary mr-2">
+                        <a href="" class="text-secondary mr-2" ng-click="vm.downloadDocument()" ng-disabled="vm.dataLoading">
                             <i class="fa fa-download"></i>
                         </a>
                         <a ng-if="vm.isWorker" href="{{ '#!/edit/document/' + vm.document.id }}" class="text-info mr-2">
