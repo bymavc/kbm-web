@@ -9,88 +9,203 @@
 
     <!-- Dependencies -->
     <!-- JQuery -->
-    <script src="dependencies/jquery/jquery.js"></script>
+    <script src="app/dependencies/jquery/jquery.js"></script>
     <!-- Popper -->
-    <script src="dependencies/popper/popper.js"></script>
-    <script src="dependencies/popper/popper-utils.js"></script>
+    <script src="app/dependencies/popper/popper.js"></script>
+    <script src="app/dependencies/popper/popper-utils.js"></script>
     <!-- Angular -->
-    <script src="dependencies/angularjs/angular.js"></script>
-    <script src="dependencies/angularjs/modules/angular-route.js"></script>
-    <script src="dependencies/angularjs/modules/angular-cookies.js"></script>
+    <script src="app/dependencies/angularjs/angular.js"></script>
+    <script src="app/dependencies/angularjs/modules/angular-route.js"></script>
+    <script src="app/dependencies/angularjs/modules/angular-cookies.js"></script>
     <!-- Bootstrap -->
-    <script src="dependencies/bootstrap/bootstrap.js"></script>
-    <link rel="stylesheet" href="dependencies/bootstrap/bootstrap.css">
-    <!-- Toastr -->
-    <script src="dependencies/toastr/toastr.js"></script>
-    <link rel="stylesheet" href="dependencies/toastr/toastr.css">
-    <!-- Croppie -->
-    <script src="dependencies/croppie/croppie.js"></script>
-    <link rel="stylesheet" href="dependencies/croppie/croppie.css">
+    <script src="app/dependencies/bootstrap/bootstrap.js"></script>
+    <link rel="stylesheet" href="app/dependencies/bootstrap/bootstrap.css">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="dependencies/font-awesome/css/font-awesome.min.css">
-    <!-- Codemirror -->
-    <script src="dependencies/codemirror/lib/codemirror.js"></script>
-    <script src="dependencies/codemirror/mode/xml/xml.js"></script>
-    <link rel="stylesheet" href="dependencies/codemirror/lib/codemirror.css">
-    <!-- Froala Editor -->
-    <script src="dependencies/froala-editor/js/froala_editor.min.js"></script>
-    <script type="text/javascript" src="dependencies/froala-editor/js/plugins/code_view.min.js"></script>
-    <link rel="stylesheet" href="dependencies/froala-editor/css/froala_editor.css">
-    <link rel="stylesheet" href="dependencies/froala-editor/css/froala_style.css">
-    <link rel="stylesheet" href="dependencies/froala-editor/css/plugins/code_view.css">
+    <link rel="stylesheet" href="app/dependencies/font-awesome/css/font-awesome.min.css">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="app-content/style.css">
+    <link rel="stylesheet" href="landing/css/main.css">
 
     <!-- App Main File -->
-    <script src="app/kbmApp.js"></script>
+    <script src="app/app/kbmApp.js"></script>
 
     <!-- App Utils -->
-    <script src="app/utils/api-url.js"></script>
-    <script src="app/utils/master.js"></script>
-
-    <!-- App Services -->
-    <script src="app-services/account.service.js"></script>
-    <script src="app-services/auth.service.js"></script>
-    <script src="app-services/code.service.js"></script>
-    <script src="app-services/document.service.js"></script>
-    <script src="app-services/flash.service.js"></script>
-    <script src="app-services/folder.service.js"></script>
-    <script src="app-services/kb.service.js"></script>
-    <script src="app-services/tag.service.js"></script>
-    <script src="app-services/user.service.js"></script>
-    <script src="app-services/validator.service.js"></script>
-
-    <!-- App Controllers -->
-    <script src="app-modules/change-password/change-password.controller.js"></script>
-    <script src="app-modules/document/document.controller.js"></script>
-    <script src="app-modules/document-edit/document-edit.controller.js"></script>
-    <script src="app-modules/document-new/document-new.controller.js"></script>
-    <script src="app-modules/header/header.controller.js"></script>
-    <script src="app-modules/home/home.controller.js"></script>
-    <script src="app-modules/login/login.controller.js"></script>
-    <script src="app-modules/kb/kb.controller.js"></script>
-    <script src="app-modules/kb-collaborators/kb-collaborators.controller.js"></script>
-    <script src="app-modules/kb-new/kb-new.controller.js"></script>
-    <script src="app-modules/kb-options/kb-options.controller.js"></script>
-    <script src="app-modules/profile/profile.controller.js"></script>
-    <script src="app-modules/profile-settings/profile-settings.controller.js"></script>
-    <script src="app-modules/recover/recover.controller.js"></script>
-    <script src="app-modules/register/register.controller.js"></script>
-    <script src="app-modules/tag/tag.controller.js"></script>
-    <script src="app-modules/verify/verify.controller.js"></script>
-
-    <!-- App Route -->
-    <script src="app/route/route.js"></script>
-
+    <script src="app/app/utils/api-url.js"></script>
+    <script src="app/app/utils/master.js"></script>
+    <!-- Landing Modules -->
+    <script src="landing/js/main.js"></script>
 </head>
 
 <body>
-    <div ng-include="'app-modules/header/header.view.html'" ng-controller="HeaderController as vm"></div>
-
-    <div ng-view></div>
-
-    <div ng-include="'app-modules/footer/footer.view.html'"></div>
+    <header class="header">
+        <div class="overlay"></div>
+        <div class="navbar fixed-top navbar-expand-sm navbar-dark bg-dark">
+            <div class="container-fluid">
+                <div class="d-flex justify-content-left">
+                    <a class="navbar-brand" href="app/">KBM</a>
+                </div>
+        
+                <div ng-show="!vm.logged" class="text-right">
+                    <a class="btn btn-dark" href="app/#!/login">Sign in</a>
+                    <a class="btn btn-primary" href="app/#!/join">Sign up</a>
+                </div>
+            </div>
+        </div>
+        <div class="description">
+            <div class="container">
+                <div class="row">
+                    <div class="col-6">
+                        <h3 class="display-3 text-dark">Hello, Welcome To KBM</h3>
+                        <p>The best way to work on knowledge and share it with others.</p>
+                        <a href="app/" class="btn btn-primary">Go to the App</a>
+                    </div>
+                    <div class="col-6">
+                        <img class="img-fluid" src="landing/img/img.png" alt="">
+                    </div>
+                </div>
+            </div>          
+        </div>
+    </header>
+    <div class="content">
+        <section class="p-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="section-title">
+                            <h1>ABOUT KBM</h1>
+                            <p>KBM stands for Knowledge Base Manager and is a system focused to build and manage knowledge bases for workgroups, allowing them to gives the necesary access priviledges and make its content either public or private as wish</p>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <img class="img-fluid rounded border" src="landing/img/image0.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="bg-lightblue pb-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <div class="section-title">
+                            <h1>FEATURES</h1>
+                            <p>Look at what you can do with KBM!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card-deck">
+                            <div class="card">
+                                <img class="card-img-top border-bottom" src="landing/img/image1.png" alt="">
+                                <div class="card-body">
+                                    <h5 class="card-title">Create Bases to Share Content</h5>
+                                    <p class="card-text">Create knowledge bases to work with your workgroups or share structured information with your friends. Remember that your bases can be public or private, it's up to you!</p>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <img class="card-img-top border-bottom" src="landing/img/image2.png" alt="">
+                                <div class="card-body">
+                                    <h5 class="card-title">Choose your collaborators</h5>
+                                    <p class="card-text">Feel free to add collaborators to help with your knowledge bases. You can add Workers to create content or readers to see it if your bases are private.</p>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <img class="card-img-top border-bottom" src="landing/img/image3.png" alt="">
+                                <div class="card-body">
+                                    <h5 class="card-title">Download as PDF</h5>
+                                    <p class="card-text">You can download all the content on your knowledge bases using the download button available on the top tight of the document layout.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="pb-5" ng-controller="MailerController as vm">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <div class="section-title">
+                            <h1>CONTACT</h1>
+                            <p>Use our Mailer to contact us or write directly to our email</p>
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="vm.sent">
+                    <div class="row">
+                        <div class="col-12">
+                            <div ng-class="vm.mailerClass">
+                                <h3 class="alert-heading">{{ vm.mailerHeading }}</h3>
+                                <hr>
+                                <p>{{ vm.mailerText }}</p>
+                                <div class="text-right">
+                                    <button ng-class="vm.mailerButtonClass" ng-click="vm.tryAgain()">{{ vm.mailerButtonText }}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="!vm.sent">
+                    <form ng-submit="vm.send()" role="form">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="fa fa-chevron-right" style="width: 15px;"></i>
+                                            </span>
+                                        </div>
+                                        <input required type="text" maxlength="30" class="form-control" placeholder="Subject" onkeypress="return validateGeneric(event)" ng-model="vm.mail.subject">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="fa fa-user" style="width: 15px;"></i>
+                                            </span>
+                                        </div>
+                                        <input required type="text" maxlength="40" class="form-control" placeholder="Full Name" onkeypress="return validateName(event)" ng-model="vm.mail.name">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="fa fa-envelope" style="width: 15px;"></i>
+                                            </span>
+                                        </div>
+                                        <input required type="text" maxlength="60" class="form-control" placeholder="Email Address" onkeypress="return validateEmail(event)" ng-model="vm.mail.email">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <textarea required maxlength="140" class="form-control" name="" id="" cols="30" rows="3" placeholder="Text Here" onkeypress="return validateGeneric(event)" ng-model="vm.mail.message"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <button ng-disabled="vm.dataLoading" class="btn btn-block btn-primary" type="submit">SUBMIT YOUR MESSAGE</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+    <footer class="bg-dark pt-4 mt-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="text-center pb-5 text-light">
+                        <h6>KBM</h6>
+                        <small>All rights reserved</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 
 </html>

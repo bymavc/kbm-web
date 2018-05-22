@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="kbmApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>KBM</title>
+
+    <!-- Dependencies -->
+    <!-- JQuery -->
+    <script src="dependencies/jquery/jquery.js"></script>
+    <!-- Popper -->
+    <script src="dependencies/popper/popper.js"></script>
+    <script src="dependencies/popper/popper-utils.js"></script>
+    <!-- Angular -->
+    <script src="dependencies/angularjs/angular.js"></script>
+    <script src="dependencies/angularjs/modules/angular-route.js"></script>
+    <script src="dependencies/angularjs/modules/angular-cookies.js"></script>
+    <!-- Bootstrap -->
+    <script src="dependencies/bootstrap/bootstrap.js"></script>
+    <link rel="stylesheet" href="dependencies/bootstrap/bootstrap.css">
+    <!-- Toastr -->
+    <script src="dependencies/toastr/toastr.js"></script>
+    <link rel="stylesheet" href="dependencies/toastr/toastr.css">
+    <!-- Croppie -->
+    <script src="dependencies/croppie/croppie.js"></script>
+    <link rel="stylesheet" href="dependencies/croppie/croppie.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="dependencies/font-awesome/css/font-awesome.min.css">
+    <!-- Codemirror -->
+    <script src="dependencies/codemirror/lib/codemirror.js"></script>
+    <script src="dependencies/codemirror/mode/xml/xml.js"></script>
+    <link rel="stylesheet" href="dependencies/codemirror/lib/codemirror.css">
+    <!-- Froala Editor -->
+    <script src="dependencies/froala-editor/js/froala_editor.min.js"></script>
+    <script type="text/javascript" src="dependencies/froala-editor/js/plugins/code_view.min.js"></script>
+    <link rel="stylesheet" href="dependencies/froala-editor/css/froala_editor.css">
+    <link rel="stylesheet" href="dependencies/froala-editor/css/froala_style.css">
+    <link rel="stylesheet" href="dependencies/froala-editor/css/plugins/code_view.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="app-content/style.css">
+
+    <!-- App Main File -->
+    <script src="app/kbmApp.js"></script>
+
+    <!-- App Utils -->
+    <script src="app/utils/api-url.js"></script>
+    <script src="app/utils/master.js"></script>
+
+    <!-- App Services -->
+    <script src="app-services/account.service.js"></script>
+    <script src="app-services/auth.service.js"></script>
+    <script src="app-services/code.service.js"></script>
+    <script src="app-services/document.service.js"></script>
+    <script src="app-services/flash.service.js"></script>
+    <script src="app-services/folder.service.js"></script>
+    <script src="app-services/kb.service.js"></script>
+    <script src="app-services/tag.service.js"></script>
+    <script src="app-services/user.service.js"></script>
+    <script src="app-services/validator.service.js"></script>
+
+    <!-- App Controllers -->
+    <script src="app-modules/change-password/change-password.controller.js"></script>
+    <script src="app-modules/document/document.controller.js"></script>
+    <script src="app-modules/document-edit/document-edit.controller.js"></script>
+    <script src="app-modules/document-new/document-new.controller.js"></script>
+    <script src="app-modules/header/header.controller.js"></script>
+    <script src="app-modules/home/home.controller.js"></script>
+    <script src="app-modules/login/login.controller.js"></script>
+    <script src="app-modules/kb/kb.controller.js"></script>
+    <script src="app-modules/kb-collaborators/kb-collaborators.controller.js"></script>
+    <script src="app-modules/kb-new/kb-new.controller.js"></script>
+    <script src="app-modules/kb-options/kb-options.controller.js"></script>
+    <script src="app-modules/profile/profile.controller.js"></script>
+    <script src="app-modules/profile-settings/profile-settings.controller.js"></script>
+    <script src="app-modules/recover/recover.controller.js"></script>
+    <script src="app-modules/register/register.controller.js"></script>
+    <script src="app-modules/tag/tag.controller.js"></script>
+    <script src="app-modules/verify/verify.controller.js"></script>
+
+    <!-- App Route -->
+    <script src="app/route/route.js"></script>
+
+</head>
+
+<body>
+    <div ng-include="'app-modules/header/header.view.html'" ng-controller="HeaderController as vm"></div>
+
+    <div ng-view></div>
+
+    <div ng-include="'app-modules/footer/footer.view.html'"></div>
+</body>
+
+</html>

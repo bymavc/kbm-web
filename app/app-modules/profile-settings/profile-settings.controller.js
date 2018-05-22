@@ -150,6 +150,7 @@
         }
 
         $('#image').change(function() {
+            display.croppie('destroy');
             loadImage(this);
             vm.imageSelected = true;
         });

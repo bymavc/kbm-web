@@ -51,6 +51,9 @@ var API = {
     },
     tag: {
         getAll: root + "tag/getAll.php"
+    },
+    info: {
+        mailer: root + "info/mailer.php"
     }
 };
 

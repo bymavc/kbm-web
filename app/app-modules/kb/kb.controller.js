@@ -140,6 +140,7 @@
                         FlashService.Success(response.message, response.title);
                         angular.element(document.getElementsByClassName('options-modal')).modal('hide');
                         vm.loadFolder(vm.folder.id);
+                        vm.new_folder.name = null;
                     } else {
                         FlashService.Error(response.message, response.title);
                         vm.dataLoading = false;

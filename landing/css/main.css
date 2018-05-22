@@ -1,0 +1,28 @@
+/*header style*/
+.overlay {
+    position: absolute;
+    min-height: 100%;
+    min-width: 100%;
+    left: 0;
+    top: 0;
+    background: rgba(230, 230, 230, 0.70);
+}
+
+.section-title {
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+.bg-lightblue {
+    background-color: cadetblue;
+}
+
+.description{
+    padding-top: 15%;
+}
+
+.description p{
+ color:#666;
+ font-size: 20px;
+ line-height: 1.5;
+}
