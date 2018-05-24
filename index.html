@@ -37,7 +37,7 @@
 </head>
 
 <body>
-    <header class="header">
+    <header class="header d-flex justify-content-center">
         <div class="overlay"></div>
         <div class="navbar fixed-top navbar-expand-sm navbar-dark bg-dark">
             <div class="container-fluid">
@@ -51,15 +51,15 @@
                 </div>
             </div>
         </div>
-        <div class="description">
+        <div class="align-self-center">
             <div class="container">
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-md-12 col-lg-6">
                         <h3 class="display-3 text-dark">Hello, Welcome To KBM</h3>
                         <p>The best way to work on knowledge and share it with others.</p>
                         <a href="app/" class="btn btn-primary">Go to the App</a>
                     </div>
-                    <div class="col-6">
+                    <div class="d-none d-lg-block col-lg-6">
                         <img class="img-fluid" src="landing/img/img.png" alt="">
                     </div>
                 </div>
@@ -70,13 +70,13 @@
         <section class="p-5">
             <div class="container">
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-md-12 col-lg-6">
                         <div class="section-title">
                             <h1>ABOUT KBM</h1>
                             <p>KBM stands for Knowledge Base Manager and is a system focused to build and manage knowledge bases for workgroups, allowing them to gives the necesary access priviledges and make its content either public or private as wish</p>
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="d-none d-lg-block col-lg-6">
                         <img class="img-fluid rounded border" src="landing/img/image0.png" alt="">
                     </div>
                 </div>
@@ -94,26 +94,32 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <div class="card-deck">
-                            <div class="card">
-                                <img class="card-img-top border-bottom" src="landing/img/image1.png" alt="">
-                                <div class="card-body">
-                                    <h5 class="card-title">Create Bases to Share Content</h5>
-                                    <p class="card-text">Create knowledge bases to work with your workgroups or share structured information with your friends. Remember that your bases can be public or private, it's up to you!</p>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-4 mb-4">
+                                <div class="card h-100">
+                                    <img class="card-img-top border-bottom" src="landing/img/image1.png" alt="">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Create Bases to Share Content</h5>
+                                        <p class="card-text">Create knowledge bases to work with your workgroups or share structured information with your friends. Remember that your bases can be public or private, it's up to you!</p>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="card">
-                                <img class="card-img-top border-bottom" src="landing/img/image2.png" alt="">
-                                <div class="card-body">
-                                    <h5 class="card-title">Choose your collaborators</h5>
-                                    <p class="card-text">Feel free to add collaborators to help with your knowledge bases. You can add Workers to create content or readers to see it if your bases are private.</p>
+                            <div class="col-sm-12 col-md-4 mb-4">
+                                <div class="card mb-2 h-100">
+                                    <img class="card-img-top border-bottom" src="landing/img/image2.png" alt="">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Choose your collaborators</h5>
+                                        <p class="card-text">Feel free to add collaborators to help with your knowledge bases. You can add Workers to create content or readers to see it if your bases are private.</p>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="card">
-                                <img class="card-img-top border-bottom" src="landing/img/image3.png" alt="">
-                                <div class="card-body">
-                                    <h5 class="card-title">Download as PDF</h5>
-                                    <p class="card-text">You can download all the content on your knowledge bases using the download button available on the top tight of the document layout.</p>
+                            <div class="col-sm-12 col-md-4 mb-4">
+                                <div class="card h-100">
+                                    <img class="card-img-top border-bottom" src="landing/img/image3.png" alt="">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Download as PDF</h5>
+                                        <p class="card-text">You can download all the content on your knowledge bases using the download button available on the top tight of the document layout.</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -148,7 +154,7 @@
                 <div ng-if="!vm.sent">
                     <form ng-submit="vm.send()" role="form">
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
@@ -180,7 +186,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-6">
+                            <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <textarea required maxlength="140" class="form-control" name="" id="" cols="30" rows="3" placeholder="Text Here" onkeypress="return validateGeneric(event)" ng-model="vm.mail.message"></textarea>
                                 </div>
