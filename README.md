@@ -1,4 +1,4 @@
-# KBM Web Client
+# KBM Web
 
 KBM stands for Knowledge Base Manager and is a project for Webmaster class at University. The project is divided in two parts. The first one is this Web Application and the second one is an [API](https://github.com/bymavc/kbm-api).
 
