@@ -1,5 +1,5 @@
 var app = "http://localhost/kbm-web";
-var root = "http://localhost/kbm-core/resource/";
+var root = "http://localhost/kbm-api/resource/";
 var API = {
     auth: {
         login: root + "auth/login.php",
